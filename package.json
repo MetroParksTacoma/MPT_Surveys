@@ -19,8 +19,6 @@
   "dependencies": {
     "body-parser": "^1.17.1",
     "express": "^4.15.2",
-    "lodash": "^4.17.4",
-    "mongo-xlsx": "^1.0.12",
-    "mongoose": "^4.9.4"
+    "lodash": "^4.17.4"
   }
 }
