@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/eragnew/MPT_Surveys/issues"
   },
-  "homepage": "https://github.com/eragnew/MPT_Surveys#readme"
+  "homepage": "https://github.com/eragnew/MPT_Surveys#readme",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2",
+    "lodash": "^4.17.4",
+    "mongoose": "^4.9.4"
+  }
 }
