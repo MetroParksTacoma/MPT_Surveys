@@ -1,0 +1,19 @@
+{
+  "name": "mpt-surveys",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eragnew/MPT_Surveys.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/eragnew/MPT_Surveys/issues"
+  },
+  "homepage": "https://github.com/eragnew/MPT_Surveys#readme"
+}
