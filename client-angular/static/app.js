@@ -1,4 +1,4 @@
-var mptSurveys = angular.module('mptSurveys', ['ngRoute', 'ngSanitize', 'chart.js'])
+var mptSurveys = angular.module('mptSurveys', ['ngRoute', 'chart.js'])
   .config(function($routeProvider) {
 
     $routeProvider.otherwise({redirectTo: '/home'});
@@ -101,7 +101,6 @@ var mptSurveys = angular.module('mptSurveys', ['ngRoute', 'ngSanitize', 'chart.j
 
     if (dataService.data) {
       $scope.loadingData = false;
-      console.log(dataService.data);
       $scope.responseCount = dataService.data.etcIds.length;
     } else {
       $http.get(dataService.ioHost + '/api/results/demographics')
@@ -109,7 +108,6 @@ var mptSurveys = angular.module('mptSurveys', ['ngRoute', 'ngSanitize', 'chart.j
           $scope.loadingData = false;
           dataService.data = response.data;
           dataService.saveData(response.data);
-          console.log(dataService.data);
           $scope.responseCount = dataService.data.etcIds.length;
         }, function(response){
           console.log(response);
