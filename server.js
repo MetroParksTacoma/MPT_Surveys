@@ -61,7 +61,6 @@ app.get('/api/results/demographics', function(req, res) {
     .toArray(function(err, results) {
       if (err) return console.log(err);
       var _results = processDemographics(results);
-      console.log(_results);
       res.status(200).json(_results);
     });
 });
