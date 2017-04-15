@@ -1,4 +1,4 @@
-var mptSurveys = angular.module('mptSurveys', ['ngRoute', 'chart.js'])
+var mptSurveys = angular.module('mptSurveys', ['ngRoute', 'ngSanitize', 'chart.js'])
   .config(function($routeProvider) {
 
     $routeProvider.otherwise({redirectTo: '/home'});
@@ -50,6 +50,15 @@ var mptSurveys = angular.module('mptSurveys', ['ngRoute', 'chart.js'])
       data: data
     };
   })
+  .directive('pdf', function() {
+    return {
+      restrict: 'E',
+      link: function(scope, element, attrs) {
+        var url = scope.$eval(attrs.src);
+        element.replaceWith('<object type="application/pdf" data="' + url + '" width="600" height="500"></object>');
+      }
+    };
+  })
   .directive('demoNav', function() {
     return {
       restrict: 'E',
@@ -65,7 +74,7 @@ var mptSurveys = angular.module('mptSurveys', ['ngRoute', 'chart.js'])
       }
     };
   })
-  .controller('homeController', function($scope, $http, $location, dataService) {
+  .controller('homeController', function($scope, $http, $location, $sce, $timeout, dataService) {
 
     $scope.loadingData = true;
     $scope.currentPage = 'info';
@@ -73,12 +82,14 @@ var mptSurveys = angular.module('mptSurveys', ['ngRoute', 'chart.js'])
     if (dataService.data) {
       $scope.loadingData = false;
       console.log(dataService.data);
+      $scope.responseCount = dataService.data.etcIds.length;
     } else {
       $http.get('http://localhost:4545/api/results/demographics')
         .then(function(response) {
           $scope.loadingData = false;
           dataService.data = response.data;
           console.log(dataService.data);
+          $scope.responseCount = dataService.data.etcIds.length;
         }, function(response){
           console.log(response);
         });
