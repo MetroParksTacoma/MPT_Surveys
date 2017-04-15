@@ -1,4 +1,4 @@
-var mptSurveys = angular.module('mptSurveys', ['ngRoute'])
+var mptSurveys = angular.module('mptSurveys', ['ngRoute', 'chart.js'])
   .config(function($routeProvider, $compileProvider, $httpProvider) {
 
     $routeProvider.otherwise({redirectTo: '/home'});
