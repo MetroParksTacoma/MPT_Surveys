@@ -44,11 +44,31 @@ var mptSurveys = angular.module('mptSurveys', ['ngRoute', 'ngSanitize', 'chart.j
     });
 
   })
-  .factory('dataService', function() {
+  .factory('dataService', function($window) {
+
     var data;
-    return {
-      data: data
+
+    var ioHost = 'http://localhost:4545';
+    // var ioHost = 'http://ec2-52-10-158-21.us-west-2.compute.amazonaws.com:4545';
+
+    var saveData = function(_data) {
+      $window.sessionStorage.setItem('resultsData', JSON.stringify(_data));
+      data = _data;
     };
+
+    var loadData = function() {
+      data = JSON.parse($window.sessionStorage.getItem('resultsData'));
+    };
+
+    loadData();
+
+    return {
+      data: data,
+      ioHost: ioHost,
+      saveData: saveData,
+      loadData: loadData
+    };
+
   })
   .directive('pdf', function() {
     return {
@@ -88,6 +108,7 @@ var mptSurveys = angular.module('mptSurveys', ['ngRoute', 'ngSanitize', 'chart.j
         .then(function(response) {
           $scope.loadingData = false;
           dataService.data = response.data;
+          dataService.saveData(response.data);
           console.log(dataService.data);
           $scope.responseCount = dataService.data.etcIds.length;
         }, function(response){
