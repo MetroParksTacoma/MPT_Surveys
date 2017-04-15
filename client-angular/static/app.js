@@ -38,6 +38,11 @@ var mptSurveys = angular.module('mptSurveys', ['ngRoute', 'chart.js'])
       controller: 'ethnicityController'
     });
 
+    $routeProvider.when('/military', {
+      templateUrl: 'static/templates/military.template.html',
+      controller: 'militaryController'
+    });
+
   })
   .factory('dataService', function() {
     var data;
@@ -221,6 +226,22 @@ var mptSurveys = angular.module('mptSurveys', ['ngRoute', 'chart.js'])
     $scope.nativePercent = roundTo(q25.nativeCount*100/$scope.totalCount, 1);
     $scope.otherCount = q25.otherCount;
     $scope.otherPercent = roundTo(q25.otherCount*100/$scope.totalCount, 1);
+
+  })
+  .controller('militaryController', function($scope, $location, dataService) {
+
+    if (!dataService.data) return $location.path('/home');
+
+    var q26 = dataService.data.q26;
+
+    $scope.labels = ['Yes', 'No'];
+    $scope.data = [q26.yesCount, q26.noCount];
+
+    $scope.yesCount = q26.yesCount;
+    $scope.yesPercent = roundTo(q26.yesCount*100/(q26.yesCount+q26.noCount), 1);
+
+    $scope.noCount = q26.noCount;
+    $scope.noPercent = roundTo(q26.noCount*100/(q26.yesCount+q26.noCount), 1);
 
   });
 

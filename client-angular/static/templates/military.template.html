@@ -1,0 +1,30 @@
+<div class="row" style="margin-top: 40px;">
+  <div class="col-md-1"></div>
+  <div class="col-md-2">
+    <demo-nav current-page="'military'"></demo-nav>
+  </div>
+  <div class="col-md-6">
+
+    <h4>Q8: Are you or any member of your household currently in the military or a veteran?</h4>
+
+    <div style="margin-top: 20px;"></div>
+
+    <canvas id="bar" class="chart chart-pie"
+      chart-data="data" chart-labels="labels">
+    </canvas>
+
+  </div>
+  <div class="col-md-2">
+    <div style="margin-top: 20px;"></div>
+    <p>
+      Yes: <b>{{yesPercent}}%</b> ({{yesCount}})
+    </p>
+    <p>
+      No: <b>{{noPercent}}%</b> ({{noCount}})
+    </p>
+    <p>
+      Total: <b>{{yesPercent + noPercent}}%</b> ({{yesCount + noCount}})
+    </p>
+  </div>
+  <div class="col-md-1"></div>
+</div>
