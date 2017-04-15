@@ -1,9 +1,9 @@
 <div class="row">
-  <div class="col-md-3"></div>
-  <div class="col-md-6" ng-if="loadingData">
+  <div class="col-md-2"></div>
+  <div class="col-md-8" ng-if="loadingData">
     <h3>Loading data...</h3>
   </div>
-  <div class="col-md-6" ng-if="!loadingData">
+  <div class="col-md-8" ng-if="!loadingData">
 
     <div style="margin-top: 20px;"></div>
     <p>
@@ -18,8 +18,24 @@
 
     <canvas id="bar" class="chart chart-bar"
       chart-data="q19Data" chart-labels="q19Labels" chart-series="q19Series">
-    </canvas
+    </canvas>
+
+    <div style="margin-top: 40px;"></div>
+
+    <h4>Q2: What is your age?</h4>
+
+    <div style="margin-top: 20px;"></div>
+
+    <canvas id="bar" class="chart chart-bar"
+      chart-data="q20Data" chart-labels="q20Labels" chart-series="q20Series">
+    </canvas>
+
+    <div style="margin-top: 20px;"></div>
+
+    <p>
+      The mean age of respondents is {{q20Average}} years old.
+    </p>
 
   </div>
-  <div class="col-md-3"></div>
+  <div class="col-md-2"></div>
 </div>

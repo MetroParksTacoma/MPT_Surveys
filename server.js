@@ -135,15 +135,17 @@ function processDemographics(results) {
     if (item['Q19_HOUSEHOLD _10_'] !== '') q19.a10 += item['Q19_HOUSEHOLD _10_'];
     if (item['Q19_HOUSEHOLD _11_'] !== '') q19.a11 += item['Q19_HOUSEHOLD _11_'];
     // Q20
-    var tempQ20 = _.find(q20, function(o) {
-      return o.age === item['Q20_AGE'];
-    });
-    if (tempQ20) {
-      tempQ20.count++;
-    } else {
-      q20.push({age: item['Q20_AGE'], count: 1});
+    if (item['Q20_AGE'] !== '') {
+      var tempQ20 = _.find(q20, function(o) {
+        return o.age === item['Q20_AGE'];
+      });
+      if (tempQ20) {
+        tempQ20.count++;
+      } else {
+        q20.push({age: item['Q20_AGE'], count: 1});
+      }
+      tempQ20 = null;
     }
-    tempQ20 = null;
     // Q21
     if (item['Q21_GENDER_Code_'] === 1) {
       q21.mCount++;
