@@ -19,6 +19,13 @@ client.connect('mongodb://localhost/mptsurveys', function(err, _db) {
 
 app.use(express.static(__dirname + '/client-angular'));
 
+app.all('*', function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type,X-Requested-With,bakon,ham,iohost,apphost,Authorization');
+    next();
+});
+
 app.get('/api/results', function(req, res) {
   db.collection('results').find({}).limit(10).toArray(function(err, results) {
     if (err) console.log(err);
