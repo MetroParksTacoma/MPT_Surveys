@@ -70,12 +70,12 @@ var mptSurveys = angular.module('mptSurveys', ['ngRoute', 'ngSanitize', 'chart.j
     };
 
   })
-  .directive('pdf', function() {
+  .directive('pdf', function(dataService) {
     return {
       restrict: 'E',
       link: function(scope, element, attrs) {
         var url = scope.$eval(attrs.src);
-        element.replaceWith('<object type="application/pdf" data="' + url + '" width="600" height="500"></object>');
+        element.replaceWith('<object type="application/pdf" data="' + dataService.ioHost + '/' + url + '" width="600" height="500"></object>');
       }
     };
   })
@@ -104,7 +104,7 @@ var mptSurveys = angular.module('mptSurveys', ['ngRoute', 'ngSanitize', 'chart.j
       console.log(dataService.data);
       $scope.responseCount = dataService.data.etcIds.length;
     } else {
-      $http.get('http://localhost:4545/api/results/demographics')
+      $http.get(dataService.ioHost + '/api/results/demographics')
         .then(function(response) {
           $scope.loadingData = false;
           dataService.data = response.data;
