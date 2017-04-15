@@ -1,6 +1,9 @@
 <div class="row">
   <div class="col-md-3"></div>
-  <div class="col-md-6">
+  <div class="col-md-6" ng-if="loadingData">
+    <h3>Loading data...</h3>
+  </div>
+  <div class="col-md-6" ng-if="!loadingData">
 
     <div style="margin-top: 20px;"></div>
     <p>
@@ -10,6 +13,12 @@
     <div style="margin-top: 40px;"></div>
 
     <h4>Q1: Counting yourself, how many people in your household are within the following age ranges?</h4>
+
+    <div style="margin-top: 20px;"></div>
+
+    <canvas id="bar" class="chart chart-bar"
+      chart-data="q19Data" chart-labels="q19Labels" chart-series="q19Series">
+    </canvas
 
   </div>
   <div class="col-md-3"></div>
