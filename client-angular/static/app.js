@@ -11,6 +11,13 @@ var mptSurveys = angular.module('mptSurveys', ['ngRoute'])
   })
   .controller('homeController', function($scope, $http) {
 
-    //
+    $scope.loadingData = true;
+
+    $http.get('http://localhost:4545/api/results/demographics')
+      .then(function(response) {
+        console.log(response.data);
+      }, function(response){
+        console.log(response);
+      });
 
   });
