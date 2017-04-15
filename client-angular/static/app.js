@@ -18,6 +18,11 @@ var mptSurveys = angular.module('mptSurveys', ['ngRoute', 'chart.js'])
       controller: 'ageController'
     });
 
+    $routeProvider.when('/gender', {
+      templateUrl: 'static/templates/gender.template.html',
+      controller: 'genderController'
+    });
+
   })
   .factory('dataService', function() {
     var data;
@@ -47,11 +52,13 @@ var mptSurveys = angular.module('mptSurveys', ['ngRoute', 'chart.js'])
 
     if (dataService.data) {
       $scope.loadingData = false;
+      console.log(dataService.data);
     } else {
       $http.get('http://localhost:4545/api/results/demographics')
         .then(function(response) {
           $scope.loadingData = false;
           dataService.data = response.data;
+          console.log(dataService.data);
         }, function(response){
           console.log(response);
         });
@@ -97,6 +104,22 @@ var mptSurveys = angular.module('mptSurveys', ['ngRoute', 'chart.js'])
       ageCount++;
     });
     $scope.q20Average = roundTo((ageSum/ageCount), 1);
+
+  })
+  .controller('genderController', function($scope, $location, dataService) {
+
+    if (!dataService.data) return $location.path('/home');
+
+    var q21 = dataService.data.q21;
+
+    $scope.labels = ['Male', 'Female'];
+    $scope.data = [q21.mCount, q21.fCount];
+
+    $scope.fCount = q21.fCount;
+    $scope.fPercent = roundTo(q21.fCount*100/(q21.fCount+q21.mCount), 1);
+
+    $scope.mCount = q21.mCount;
+    $scope.mPercent = roundTo(q21.mCount*100/(q21.fCount+q21.mCount), 1);
 
   });
 
