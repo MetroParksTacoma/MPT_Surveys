@@ -1,17 +1,21 @@
 <div class="row" style="margin-top: 40px;">
   <div class="col-md-1"></div>
   <div class="col-md-2">
-    <demo-nav current-page="'income'"></demo-nav>
+    <demo-nav current-page="'years'"></demo-nav>
   </div>
   <div class="col-md-8">
 
-    <h4>Q4: What is your household income?</h4>
+    <h4>Q5: How many years have you lived in Tacoma?</h4>
 
     <div style="margin-top: 20px;"></div>
 
     <canvas id="bar" class="chart chart-bar"
-      chart-data="data" chart-labels="labels" chart-series="series" chart-options="options">
+      chart-data="data" chart-labels="labels" chart-series="series">
     </canvas>
+
+    <p>
+      The mean years lived in Tacoma of respondents is <b>{{yearsAverage}}</b> years.
+    </p>
 
   </div>
   <div class="col-md-1"></div>

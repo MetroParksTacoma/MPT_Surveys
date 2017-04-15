@@ -28,6 +28,11 @@ var mptSurveys = angular.module('mptSurveys', ['ngRoute', 'chart.js'])
       controller: 'incomeController'
     });
 
+    $routeProvider.when('/years', {
+      templateUrl: 'static/templates/years.template.html',
+      controller: 'yearsController'
+    });
+
   })
   .factory('dataService', function() {
     var data;
@@ -148,6 +153,25 @@ var mptSurveys = angular.module('mptSurveys', ['ngRoute', 'chart.js'])
         yAxes: [{ticks: {beginAtZero: true}}]
       }
     };
+
+  })
+  .controller('yearsController', function($scope, $location, dataService) {
+
+    if (!dataService.data) return $location.path('/home');
+
+    var yearsSum = 0;
+    var yearsCount = 0;
+    var q23 = _.sortBy(dataService.data.q23, 'years');
+    $scope.series = ['Q23'];
+    $scope.labels = [];
+    $scope.data = [];
+    _.forEach(q23, function(item) {
+      $scope.labels.push(item.years);
+      $scope.data.push(item.count);
+      yearsSum += parseInt(item.years);
+      yearsCount++;
+    });
+    $scope.yearsAverage = roundTo((yearsSum/yearsCount), 1);
 
   });
 

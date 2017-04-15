@@ -160,15 +160,17 @@ function processDemographics(results) {
     if (item['Q22_INCOME_Code_'] === 5) q22.a5++;
     if (item['Q22_INCOME_Code_'] === 6) q22.a6++;
     // Q23
-    var tempQ23 = _.find(q23, function(o) {
-      return o.years === item['Q23_LIVED'];
-    });
-    if (tempQ23) {
-      tempQ23.count++;
-    } else {
-      q23.push({years: item['Q23_LIVED'], count: 1});
+    if (item['Q23_LIVED'] !== '') {
+      var tempQ23 = _.find(q23, function(o) {
+        return o.years === item['Q23_LIVED'];
+      });
+      if (tempQ23) {
+        tempQ23.count++;
+      } else {
+        q23.push({years: item['Q23_LIVED'], count: 1});
+      }
+      tempQ23 = null;
     }
-    tempQ23 = null;
     // Q24
     if (item['Q24_HISPANIC_Code_'] === 1) {
       q24.yesCount++;
