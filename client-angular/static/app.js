@@ -23,6 +23,11 @@ var mptSurveys = angular.module('mptSurveys', ['ngRoute', 'chart.js'])
       controller: 'genderController'
     });
 
+    $routeProvider.when('/income', {
+      templateUrl: 'static/templates/income.template.html',
+      controller: 'incomeController'
+    });
+
   })
   .factory('dataService', function() {
     var data;
@@ -120,6 +125,29 @@ var mptSurveys = angular.module('mptSurveys', ['ngRoute', 'chart.js'])
 
     $scope.mCount = q21.mCount;
     $scope.mPercent = roundTo(q21.mCount*100/(q21.fCount+q21.mCount), 1);
+
+  })
+  .controller('incomeController', function($scope, $location, dataService) {
+
+    if (!dataService.data) return $location.path('/home');
+
+    var q22 = dataService.data.q22;
+
+    $scope.series = ['Q22'];
+    $scope.labels = [
+      'Under $25k',
+      '$25-49k',
+      '$50-74k',
+      '$75-99k',
+      '$100-149k',
+      '$150k+'
+    ];
+    $scope.data = [q22.a1, q22.a2, q22.a3, q22.a4, q22.a5, q22.a6];
+    $scope.options = {
+      scales: {
+        yAxes: [{ticks: {beginAtZero: true}}]
+      }
+    };
 
   });
 
