@@ -1,0 +1,57 @@
+<div class="row" style="margin-top: 40px;">
+  <div class="col-md-1"></div>
+  <div class="col-md-2">
+    <demo-nav current-page="'ethnicity'"></demo-nav>
+  </div>
+  <div class="col-md-4">
+
+    <h4>Q6: Are you or any member of your household of Hispanic/Latino ethnicity?</h4>
+
+    <div style="margin-top: 20px;"></div>
+
+    <canvas id="bar" class="chart chart-pie"
+      chart-data="hispanicData" chart-labels="hispanicLabels">
+    </canvas>
+
+    <p>
+      <br />
+      Yes: <b>{{hispanicYesPercent}}%</b> ({{hispanicYesCount}})
+    </p>
+    <p>
+      No: <b>{{hispanicNoPercent}}%</b> ({{hispanicNoCount}})
+    </p>
+
+  </div>
+  <div class="col-md-4">
+
+    <h4>Q7: Which of the following best describes your race/ethnicity? (Check all that apply)</h4>
+
+    <div style="margin-top: 20px;"></div>
+
+    <canvas id="bar" class="chart chart-pie"
+      chart-data="ethnicityData" chart-labels="ethnicityLabels">
+    </canvas>
+
+    <p>
+      <br />
+      White/Caucasian: <b>{{whitePercent}}%</b> ({{whiteCount}})
+    </p>
+    <p>
+      Asian: <b>{{asianPercent}}%</b> ({{asianCount}})
+    </p>
+    <p>
+      Pacific Islander: <b>{{pacIslandPercent}}%</b> ({{pacIslandCount}})
+    </p>
+    <p>
+      African American/Black: <b>{{blackPercent}}%</b> ({{blackCount}})
+    </p>
+    <p>
+      Native American: <b>{{nativePercent}}%</b> ({{nativeCount}})
+    </p>
+    <p>
+      Other: <b>{{otherPercent}}%</b> ({{otherCount}})
+    </p>
+
+  </div>
+  <div class="col-md-1"></div>
+</div>

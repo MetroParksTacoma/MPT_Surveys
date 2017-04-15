@@ -33,6 +33,11 @@ var mptSurveys = angular.module('mptSurveys', ['ngRoute', 'chart.js'])
       controller: 'yearsController'
     });
 
+    $routeProvider.when('/ethnicity', {
+      templateUrl: 'static/templates/ethnicity.template.html',
+      controller: 'ethnicityController'
+    });
+
   })
   .factory('dataService', function() {
     var data;
@@ -172,6 +177,50 @@ var mptSurveys = angular.module('mptSurveys', ['ngRoute', 'chart.js'])
       yearsCount++;
     });
     $scope.yearsAverage = roundTo((yearsSum/yearsCount), 1);
+
+  })
+  .controller('ethnicityController', function($scope, $location, dataService) {
+
+    if (!dataService.data) return $location.path('/home');
+
+    var q24 = dataService.data.q24;
+    $scope.hispanicLabels = ['Yes', 'No'];
+    $scope.hispanicData = [q24.yesCount, q24.noCount];
+    $scope.hispanicYesCount = q24.yesCount;
+    $scope.hispanicYesPercent = roundTo(q24.yesCount*100/(q24.yesCount+q24.noCount), 1);
+    $scope.hispanicNoCount = q24.noCount;
+    $scope.hispanicNoPercent = roundTo(q24.noCount*100/(q24.yesCount+q24.noCount), 1);
+
+    var q25 = dataService.data.q25;
+    $scope.ethnicityLabels = [
+      'White/Caucasian',
+      'Asian',
+      'Pacific Islander',
+      'African American/Black',
+      'Native American',
+      'Other'
+    ];
+    $scope.ethnicityData = [
+      q25.whiteCount,
+      q25.asianCount,
+      q25.pacIslandCount,
+      q25.blackCount,
+      q25.nativeCount,
+      q25.otherCount
+    ];
+    $scope.totalCount = q25.whiteCount + q25.asianCount + q25.pacIslandCount + q25.blackCount + q25.nativeCount + q25.otherCount;
+    $scope.whiteCount = q25.whiteCount;
+    $scope.whitePercent = roundTo(q25.whiteCount*100/$scope.totalCount, 1);
+    $scope.asianCount = q25.asianCount;
+    $scope.asianPercent = roundTo(q25.asianCount*100/$scope.totalCount, 1);
+    $scope.pacIslandCount = q25.pacIslandCount;
+    $scope.pacIslandPercent = roundTo(q25.pacIslandCount*100/$scope.totalCount, 1);
+    $scope.blackCount = q25.blackCount;
+    $scope.blackPercent = roundTo(q25.blackCount*100/$scope.totalCount, 1);
+    $scope.nativeCount = q25.nativeCount;
+    $scope.nativePercent = roundTo(q25.nativeCount*100/$scope.totalCount, 1);
+    $scope.otherCount = q25.otherCount;
+    $scope.otherPercent = roundTo(q25.otherCount*100/$scope.totalCount, 1);
 
   });
 
