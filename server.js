@@ -17,6 +17,8 @@ client.connect('mongodb://localhost/mptsurveys', function(err, _db) {
   console.log('connected to mongodb...');
 });
 
+app.use(express.static(__dirname + '/client-angular'));
+
 app.get('/api/results', function(req, res) {
   db.collection('results').find({}).limit(10).toArray(function(err, results) {
     if (err) console.log(err);
