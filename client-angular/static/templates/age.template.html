@@ -1,0 +1,22 @@
+<div class="row" style="margin-top: 40px;">
+  <div class="col-md-1"></div>
+  <div class="col-md-2">
+    <demo-nav current-page="'age'"></demo-nav>
+  </div>
+  <div class="col-md-8">
+
+    <h4>Q2: What is your age?</h4>
+
+    <div style="margin-top: 20px;"></div>
+
+    <canvas id="bar" class="chart chart-bar"
+      chart-data="q20Data" chart-labels="q20Labels" chart-series="q20Series">
+    </canvas>
+    
+    <p>
+      The mean age of respondents is <b>{{q20Average}}</b> years old.
+    </p>
+
+  </div>
+  <div class="col-md-1"></div>
+</div>
